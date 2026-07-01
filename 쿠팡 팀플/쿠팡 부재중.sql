@@ -373,3 +373,81 @@ COMMIT;
 --------------------------------------------------------------------------------
 SELECT * FROM seller;
 --------------------------------------------------------------------------------
+
+
+--- orders
+
+--시퀀스 삭제
+
+DROP SEQUENCE SEQ_ORDERS;
+
+---
+CREATE SEQUENCE SEQ_ORDERS
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+CREATE OR REPLACE PROCEDURE PROC_INSERT_ORDER
+(
+    P_MEMBER_NO       IN ORDERS.MEMBER_NO%TYPE,
+    P_ADDRESS_NO      IN ORDERS.ADDRESS_NO%TYPE,
+    P_PAYMENT_METHOD  IN ORDERS.PAYMENT_METHOD%TYPE,
+    P_DELIVERY_FEE    IN ORDERS.DELIVERY_FEE%TYPE,
+    P_TOTAL_PRICE     IN ORDERS.TOTAL_PRICE%TYPE
+)
+IS
+   -- 총 금액이 20,000원 이상이면 배송비 무료
+    V_DELIVERY_FEE NUMBER;
+BEGIN
+
+    IF P_TOTAL_PRICE >= 20000 THEN
+        V_DELIVERY_FEE := 0;
+    ELSE
+        V_DELIVERY_FEE := 3000;
+    END IF;
+
+    INSERT INTO ORDERS
+    (
+        ORDER_NO,
+        MEMBER_NO,
+        ADDRESS_NO,
+        ORDER_DATE,
+        PAYMENT_METHOD,
+        DELIVERY_FEE,
+        TOTAL_PRICE,
+        ORDER_STATUS
+    )
+    VALUES
+    (
+        SEQ_ORDERS.NEXTVAL,
+        P_MEMBER_NO,
+        P_ADDRESS_NO,
+        SYSDATE,
+        P_PAYMENT_METHOD,
+        V_DELIVERY_FEE,
+        P_TOTAL_PRICE,
+        '결제완료'
+    );
+
+    COMMIT;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK;
+        RAISE;
+END;
+/
+
+BEGIN
+    PROC_INSERT_ORDER(
+        1 ,
+        1 ,
+        1 ,
+        0 , 
+        15000  
+    );
+END;
+/
+
+select * 
+from orders;
