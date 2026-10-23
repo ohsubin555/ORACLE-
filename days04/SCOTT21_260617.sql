@@ -33,10 +33,10 @@ ORDER BY hiredate ASC;
 
 --3. SQL 연산자
 -- 수도권 아닌 사원정보
+SELECT *
 FROM insa
 WHERE city NOT IN ('경기', '서울', '인천')
-ORDER BY city ASC;SELECT *
-
+ORDER BY city ASC;
 
 --3. SET (집합) 연산자
 --합집합 (UNION, UNION ALL) 
@@ -344,7 +344,7 @@ FROM dual;
 SELECT SYSDATE
 , '2026.05.11'
 , MONTHS_BETWEEN (SYSDATE, '2026.05.11')
-FROM dual;-
+FROM dual;
 
 --예) emp 테이블 에서 모든 사원들의 근무개월 수, 근무 년 수, 근무 일 수 를 조회
 SELECT ROUND (MONTHS_BETWEEN (SYSDATE, HIREDATE),2) MONTH
