@@ -1,0 +1,9 @@
+SELECT *
+FROM TBL_CSTVSBOARD;
+
+SELECT *
+FROM user_sequences;
+
+SELECT seq, tag
+FROM TBL_CSTVSBOARD
+WHERE seq = 155;
