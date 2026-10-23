@@ -1,114 +1,119 @@
--- hr_main.sql 스크립트 파일 @ cmd 실행: 샘플 테이블 생성 확인.
 SELECT *
-FROM tabs;
---
---REGIONS
-DESC regions;
-컬럼	설명
-REGION_ID	지역 번호 (PK)
-REGION_NAME	지역 이름
+FROM user_tables;
+WHERE 
 
-SELECT * FROM regions;
---COUNTRIES
-DESC COUNTRIES;
-| 컬럼           | 설명         |
-| ------------ | ---------- |
-| COUNTRY_ID   | 국가 코드 (PK) |
-| COUNTRY_NAME | 국가 이름      |
-| REGION_ID    | 지역 FK      |
-SELECT * FROM countries;
---LOCATIONS
+SELECT last_name, salary 
+FROM employees
+WHERE last_name LIKE 'R%'
+ORDER BY salary;
 
-DESC LOCATIONS;
 
-컬럼	설명
-LOCATION_ID	위치 ID (PK)
-CITY	도시
-COUNTRY_ID	국가 FK
+SELECT last_name, salary 
+FROM employees
+WHERE last_name LIKE 'R___'
+ORDER BY last_name;
 
-SELECT * FROM LOCATIONS;
 
---DEPARTMENTS
+select last_name from employees
+where REGEXP_LIKE (last_name, '([aeiou])\1','i')-- 똑같은 모음 2개 연달아
+ORDER BY last_name;
 
-DESC DEPARTMENTS;
 
-| 컬럼              | 설명                 |
-| --------------- | ------------------ |
-| DEPARTMENT_ID   | 부서 ID (PK)         |
-| DEPARTMENT_NAME | 부서명                |
-| MANAGER_ID      | 부서장 (EMPLOYEES FK) |
-| LOCATION_ID     | 위치 FK              |
+SELECT first_name, last_name 
+FROM employees
+WHERE REGEXP_LIKE (first_name, '^Ste(v|ph)en$')
+ORDER BY first_name, last_name;
 
-SELECT * FROM DEPARTMENTS;
 
---JOBS
+select last_name, salary from employees
+  2  where last_name LIKE '%A\_B%' ESCAPE '\'  ☜ last_name문자중에 ...A_B...와 같은 경우
+  3  order by salary;
 
-DESC JOBS;
+------------------------------------------------------------------------------
 
-| 컬럼         | 설명         |
-| ---------- | ---------- |
-| JOB_ID     | 직무 코드 (PK) |
-| JOB_TITLE  | 직무명        |
-| MIN_SALARY | 최소 급여      |
-| MAX_SALARY | 최대 급여      |
+사원번호 154번 정보조회
+SELECT *
+FROM employees
+WHERE employee_id = 154;
+--154	Nanette	Cambrault	NCAMBRAU	011.44.1344.987668	06/12/09	SA_REP	7500	0.2	145	80
+--                     last_name 컬럼 값을 수정(DML-UPDATE) : 	C_ambrault 
+UPDATE employees
+SET last_name ='C_ambrault'
+WHERE employee_id = 154;
 
-SELECT * FROM JOBS;
+-- [문제] 100,101,102 사원의 last_name 이름을 변경
+--100   Steven   K%ing
+--101   Neena   Koch%har
+--102   Lex   De Ha%an
 
---EMPLOYEES
+SELECT *
+FROM employees
+WHERE employee_id IN (100, 101, 102);
 
-DESC EMPLOYEES;
+UPDATE employees
+SET last_name =' K%ing' , first_name =  'Steven'
+WHERE employee_id = 100;
 
-| 컬럼            | 설명         |
-| ------------- | ---------- |
-| EMPLOYEE_ID   | 직원 ID (PK) |
-| FIRST_NAME    | 이름         |
-| LAST_NAME     | 성          |
-| EMAIL         | 이메일        |
-| PHONE         | 전화         |
-| HIRE_DATE     | 입사일        |
-| JOB_ID        | 직무 FK      |
-| SALARY        | 급여         |
-| MANAGER_ID    | 상사         |
-| DEPARTMENT_ID | 부서 FK      |
+UPDATE employees
+SET last_name =' Koch%har' , first_name =  ' Neena'
+WHERE employee_id = 101;
 
-SELECT * FROM EMPLOYEES;
+UPDATE employees
+SET last_name ='De Ha%an' , first_name =  'Lex'
+WHERE employee_id = 102;
 
---JOB_HISTORY
+UPDATE employees
+SET last_name = SUBSTR( last_name, 1, LENGTH(last_name)-2) || '%' || SUBSTR( last_name,-2 )  
+WHERE employee_id IN (  100, 101, 102 );
 
-DESC JOB_HISTORY;
-| 컬럼            | 설명    |
-| ------------- | ----- |
-| EMPLOYEE_ID   | 직원 FK |
-| START_DATE    | 시작일   |
-| END_DATE      | 종료일   |
-| JOB_ID        | 직무 FK |
-| DEPARTMENT_ID | 부서 FK |
+-- 문자열 속에  '%' 포함 자 사원 조회
+SELECT last_name
+FROM employees
+--WHERE last_name LIKE '%\%%' ESCAPE '\';
+WHERE last_name LIKE '%\_%' ESCAPE '\';
 
-SELECT * FROM JOB_HISTORY;
+ROLLBACK; -- 기본 커밋 안되기 떄문에.. 
+
+----------------------------------------
 
 SELECT department_id
-FROM departments;
+FROM employees
+where department_id IS NOT NULL;
 
-SELECT DISTINCT department_id
-FROM employees;
 
-SELECT COUNT(employee_id)
-FROM employees;
+SELECT COUNT  (department_id)
+FROM (
+SELECT department_id
+FROM departments
+MINUS
+SELECT d
+epartment_id
+FROM employees
+where department_id IS NOT NULL;
+)D;
 
---각 사원의 월급, 연봉을 출력하세요. 
-SELECT employee_id,
-       first_name || ' ' || last_name name ,
-      CONCAT( CONCAT( first_name , ' ') ,  last_name ) FULL_NAME,
-       NVL(commission_pct, 0) ,
-       salary + salary * NVL(commission_pct, 0) ,
-       12 * (salary + salary * NVL(commission_pct, 0)) 
-FROM employees;
+SELECT COUNT(department_id )
+FROM departments
+WHERE department_id NOT IN (
+    SELECT department_id
+    FROM employees
+    WHERE department_id IS NOT NULL
+);
 
-SELECT last_name || '님의 급여는 ' || salary || '입니다.' result
-FROM employees;
 
--- NULL  처리 함수 : NVL(컬럼,0) , NVL2(컬럼,??,??)
-SELECT employee_id, first_name ,NVL2( manager_id ,'Y','N') MGR_YN
-      , NVL2( department_id ,'O','X') DEPT_OX
 
-FROM employees;
+-- 다른 풀이 . LEFT OUTER JOIN , GROUP BY + HAVING // NOT IN 연산자
+
+--NOT EXITS(권장)
+
+SELECT  department_id
+FROM departments d
+WHERE NOT EXISTS (--상관서브커리 
+    SELECT 1
+    FROM employees e
+    WHERE e.department_id = d.department_id
+);
+                 
+
+
+

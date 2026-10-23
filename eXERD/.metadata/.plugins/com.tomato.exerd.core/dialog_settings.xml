@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="solutionSelectionDialog">
+		<item value="1" key="applyScope"/>
+	</section>
+	<section name="com.tomato.exerd.export.ModelExportWizardDialog">
+		<item value="701" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="file" key="sendType"/>
+		<item value="XML(기본)" key="lastUsedTemplateName"/>
+		<item value="/oracleProject/coupang.html" key="destinationPath"/>
+		<item value="670" key="DIALOG_HEIGHT"/>
+		<item value="618" key="DIALOG_X_ORIGIN"/>
+		<item value="78" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="solution">
+	</section>
+	<section name="com.tomato.exerd.core.wizard.NewEXerdWizard">
+	</section>
+	<section name="com.tomato.exerd.handler.DiagramSelectDialog">
+		<item value="400" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="300" key="DIALOG_HEIGHT"/>
+		<item value="768" key="DIALOG_X_ORIGIN"/>
+		<item value="324" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.tomato.exerd.diagramwizard.DiagramWizard">
+		<item value="schema" key="method"/>
+	</section>
+	<section name="com.tomato.exerd.export.ExportModelWizard">
+		<list key="templateContents">
+		</list>
+		<list key="templateNames">
+		</list>
+	</section>
+</section>

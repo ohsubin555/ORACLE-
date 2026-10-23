@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<model>
+    <schema logicalName="내 스키마" physicalName="MY_SCHEMA"> 
+        <!--  -->
+        <table logicalName="상품" physicalName="TABLE">
+            <!--  -->
+            <column logicalName="상품번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="분류코드" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="상품코드" physicalName="COL8" />
+            <!--  -->
+            <column logicalName="상품명" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="상품설명" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="상품금액" physicalName="COL9" />
+            <!--  -->
+            <column logicalName="수량" physicalName="COL5" />
+            <!--  -->
+            <column logicalName="판매자번호(FK)" physicalName="id" />
+            <!--  -->
+            <column logicalName="소분류 번호(FK)" physicalName="COL6" />
+        </table>
+        <!--  -->
+        <table logicalName="배송" physicalName="TABLE2">
+            <!--  -->
+            <column logicalName="배송번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="주문번호(FK)" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="택배사코드" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="송장번호" physicalName="COL5" />
+            <!--  -->
+            <column logicalName="배송상태" physicalName="COL6" />
+            <!--  -->
+            <column logicalName="배송시작일시" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="배송완료일시" physicalName="COL7" />
+        </table>
+        <!--  -->
+        <table logicalName="주문" physicalName="TABLE3">
+            <!--  -->
+            <column logicalName="주문번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="회원번호(FK)" physicalName="member_no" />
+            <!--  -->
+            <column logicalName="배송지번호(FK)" physicalName="address_no" />
+            <!--  -->
+            <column logicalName="구매일" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="결제방법" physicalName="COL5" />
+            <!--  -->
+            <column logicalName="배송비" physicalName="COL7" />
+            <!--  -->
+            <column logicalName="최종결제금액" physicalName="COL8" />
+            <!--  -->
+            <column logicalName="주문상태" physicalName="COL9" />
+        </table>
+        <!--  -->
+        <table logicalName="배송지" physicalName="TABLE4">
+            <!--  -->
+            <column logicalName="배송지번호(PK)" physicalName="address_no" />
+            <!--  -->
+            <column logicalName="회원번호(FK)" physicalName="member_no" />
+            <!--  -->
+            <column logicalName="수령인" physicalName="receiver_name" />
+            <!--  -->
+            <column logicalName="연락처" physicalName="tel" />
+            <!--  -->
+            <column logicalName="우편번호" physicalName="zipcode" />
+            <!--  -->
+            <column logicalName="기본주소" physicalName="address" />
+            <!--  -->
+            <column logicalName="상세주소" physicalName="detail_address" />
+            <!--  -->
+            <column logicalName="배송요청사항" physicalName="COL8" />
+            <!--  -->
+            <column logicalName="기본 배송지여부" physicalName="COL9" />
+        </table>
+        <!--  -->
+        <table logicalName="주문상세" physicalName="TABLE5">
+            <!--  -->
+            <column logicalName="주문상세번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="주문번호(FK)" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="상품번호(FK)" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="옵션코드(FK)" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="주문수량" physicalName="COL5" />
+            <!--  -->
+            <column logicalName="가격" physicalName="COL6" />
+        </table>
+        <!--  -->
+        <table logicalName="회원" physicalName="TABLE6">
+            <!--  -->
+            <column logicalName="회원번호(PK)" physicalName="member_no" />
+            <!--  -->
+            <column logicalName="회원아이디" physicalName="member_id" />
+            <!--  -->
+            <column logicalName="비밀번호" physicalName="member_pw" />
+            <!--  -->
+            <column logicalName="이름" physicalName="member_name" />
+            <!--  -->
+            <column logicalName="전화번호" physicalName="tel" />
+            <!--  -->
+            <column logicalName="이메일" physicalName="email" />
+            <!--  -->
+            <column logicalName="등급" physicalName="rank" />
+        </table>
+        <!--  -->
+        <table logicalName="옵션" physicalName="TABLE8">
+            <!--  -->
+            <column logicalName="옵션코드(PK)" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="색상" physicalName="COL" />
+            <!--  -->
+            <column logicalName="수량" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="사이즈" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="상품번호(FK)" physicalName="COL5" />
+        </table>
+        <!--  -->
+        <table logicalName="장바구니" physicalName="TABLE9">
+            <!--  -->
+            <column logicalName="회원번호(FK)" physicalName="member_no" />
+            <!--  -->
+            <column logicalName="재고번호(UNIQUE)(FK)" physicalName="SKU_ID" />
+        </table>
+        <!--  -->
+        <table logicalName="찜하기" physicalName="TABLE10">
+            <!--  -->
+            <column logicalName="회원번호(FK)" physicalName="member_no" />
+            <!--  -->
+            <column logicalName="재고번호(UNIQUE)(FK)" physicalName="SKU_ID" />
+        </table>
+        <!--  -->
+        <table logicalName="판매자" physicalName="TABLE11">
+            <!--  -->
+            <column logicalName="판매자번호(PK)" physicalName="id" />
+            <!--  -->
+            <column logicalName="사업장주소" physicalName="COL10" />
+            <!--  -->
+            <column logicalName="정산계좌" physicalName="COL6" />
+            <!--  -->
+            <column logicalName="사업자등록번호" physicalName="COL7" />
+            <!--  -->
+            <column logicalName="상호명" physicalName="COL8" />
+            <!--  -->
+            <column logicalName="은행명" physicalName="COL9" />
+            <!--  -->
+            <column logicalName="아이디" physicalName="COL" />
+            <!--  -->
+            <column logicalName="비밀번호" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="대표자명" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="전화번호" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="이메일" physicalName="COL5" />
+        </table>
+        <!--  -->
+        <table logicalName="결제-회원" physicalName="TABLE12">
+            <!--  -->
+            <column logicalName="결제번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="결제금액" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="결제일시" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="주문번호(FK)" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="회원번호(FK)" physicalName="member_no" />
+        </table>
+        <!--  -->
+        <table logicalName="결제- 판매자" physicalName="TABLE13">
+            <!--  -->
+            <column logicalName="정산번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="정산금액" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="수수료" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="정산일" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="정산상태" physicalName="COL5" />
+            <!--  -->
+            <column logicalName="판매자번호(FK)" physicalName="id" />
+        </table>
+        <!--  -->
+        <table logicalName="리뷰" physicalName="TABLE7">
+            <!--  -->
+            <column logicalName="리뷰번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="별점" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="리뷰내용" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="작성일" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="상품번호(FK)" physicalName="COL5" />
+            <!--  -->
+            <column logicalName="회원번호(FK)" physicalName="member_no" />
+        </table>
+        <!--  -->
+        <table logicalName="관리자" physicalName="TABLE14">
+            <!--  -->
+            <column logicalName="관리자 번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="아이디" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="비밀번호" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="이름" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="이메일" physicalName="COL5" />
+            <!--  -->
+            <column logicalName="연락처" physicalName="COL6" />
+        </table>
+        <!--  -->
+        <table logicalName="상품 대분류" physicalName="TABLE15">
+            <!--  -->
+            <column logicalName="대분류 번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="대분류명" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="등록일" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="관리자 번호(FK)" physicalName="COL4" />
+        </table>
+        <!--  -->
+        <table logicalName="상품 소분류" physicalName="TABLE16">
+            <!--  -->
+            <column logicalName="소분류 번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="소분류명" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="등록일" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="중분류 번호(FK)" physicalName="COL4" />
+        </table>
+        <!--  -->
+        <table logicalName="상품 중분류" physicalName="TABLE17">
+            <!--  -->
+            <column logicalName="중분류 번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="중분류명" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="등록일" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="대분류 번호(FK)" physicalName="COL4" />
+        </table>
+        <!--  -->
+        <table logicalName="재고수량" physicalName="TABLE18">
+        </table>
+        <!--  -->
+        <table logicalName="반품" physicalName="TABLE19">
+            <!--  -->
+            <column logicalName="반품번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="반품 신청 날짜" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="반품 수량" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="반품 사유" physicalName="COL5" />
+            <!--  -->
+            <column logicalName="반품 상태" physicalName="COL6" />
+            <!--  -->
+            <column logicalName="환불금액" physicalName="COL7" />
+            <!--  -->
+            <column logicalName="주문상세번호(FK)" physicalName="COL3" />
+        </table>
+        <!--  -->
+        <table logicalName="상품 문의" physicalName="TABLE20">
+            <!--  -->
+            <column logicalName="문의번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="문의내용" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="문의등록일" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="회원번호(FK)" physicalName="member_no" />
+            <!--  -->
+            <column logicalName="재고번호(UNIQUE)(FK)" physicalName="SKU_ID" />
+        </table>
+        <!--  -->
+        <table logicalName="문의 답변" physicalName="TABLE21">
+            <!--  -->
+            <column logicalName="답변번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="답변내용" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="답변일" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="문의번호(FK)" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="판매자번호(FK)" physicalName="id" />
+        </table>
+        <!--  -->
+        <table logicalName="상품옵션" physicalName="TABLE22">
+            <!--  -->
+            <column logicalName="옵션번호(PK)" physicalName="COL" />
+            <!--  -->
+            <column logicalName="색상" physicalName="COL2" />
+            <!--  -->
+            <column logicalName="사이즈" physicalName="COL3" />
+            <!--  -->
+            <column logicalName="상품재고" physicalName="COL4" />
+            <!--  -->
+            <column logicalName="상품번호(FK)" physicalName="COL5" />
+        </table>
+        <!--  -->
+        <table logicalName="새 테이블" physicalName="TABLE23">
+        </table>
+    </schema>
+    <schema logicalName="SCOTT" physicalName="SCOTT"> 
+        <!--  -->
+        <table logicalName="상품" physicalName="PRODUCT">
+            <!--  -->
+            <column logicalName="상품번호 (PK)" physicalName="PRODUCT_ID" />
+            <!--  -->
+            <column logicalName="상품이름" physicalName="PRODUCT_NAME" />
+            <!--  -->
+            <column logicalName="가격" physicalName="PRICE" />
+            <!--  -->
+            <column logicalName="배송비" physicalName="DELIVERY_FEE" />
+            <!--  -->
+            <column logicalName="상태" physicalName="STATUS" />
+            <!--  -->
+            <column logicalName="등록일" physicalName="REG_DATE" />
+        </table>
+        <!--  -->
+        <table logicalName="상품_재고_옵션" physicalName="PRODUCT_SKU_OPTION">
+            <!--  -->
+            <column logicalName="재고번호(UNIQUE)(PFK)" physicalName="SKU_ID" />
+            <!--  -->
+            <column logicalName="옵션항목번호(UNIQUE)(PFK)" physicalName="OPTION_ID" />
+        </table>
+        <!--  -->
+        <table logicalName="상품_옵션_값" physicalName="PRODUCT_OPTION_VALUE">
+            <!--  -->
+            <column logicalName="옵션항목번호(UNIQUE)(PK)" physicalName="OPTION_ID" />
+            <!--  -->
+            <column logicalName="그룹번호(FK)" physicalName="GROUP_ID" />
+            <!--  -->
+            <column logicalName="옵션이름" physicalName="OPTION_NAME" />
+        </table>
+        <!--  -->
+        <table logicalName="상품_옵션_그룹" physicalName="PRODUCT_OPTION_GROUP">
+            <!--  -->
+            <column logicalName="그룹번호(PK)" physicalName="GROUP_ID" />
+            <!--  -->
+            <column logicalName="상품번호 (FK)" physicalName="PRODUCT_ID" />
+            <!--  -->
+            <column logicalName="그룹이름" physicalName="GROUP_NAME" />
+            <!--  -->
+            <column logicalName="상품번호(FK)" physicalName="COL" />
+        </table>
+        <!--  -->
+        <table logicalName="상품 재고 상태" physicalName="PRODUCT_SKU">
+            <!--  -->
+            <column logicalName="재고번호(UNIQUE)(PK)" physicalName="SKU_ID" />
+            <!--  -->
+            <column logicalName="상품번호 (FK)" physicalName="PRODUCT_ID" />
+            <!--  -->
+            <column logicalName="옵션이름" physicalName="COL" />
+            <!--  -->
+            <column logicalName="가격" physicalName="EXTRA_PRICE" />
+            <!--  -->
+            <column logicalName="보유수량" physicalName="STOCK" />
+            <!--  -->
+            <column logicalName="상태" physicalName="STATUS" />
+        </table>
+    </schema>
+</model>
